@@ -3,7 +3,7 @@ on:
 jobs:
   test:
     name: test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: test
         run: echo HELLO WORLD
