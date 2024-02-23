@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: github.event.workflow_run.referenced_workflows[0].ref
+        ref: ${{ github.event.workflow_run.referenced_workflows[0].ref }}
     - uses: actions/download-artifact@v3
       continue-on-error: true
       with:
