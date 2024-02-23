@@ -6,5 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - run: echo ${{ github.triggering_actor.login }}
     - run: echo ${{ github.event.sender.login }}
     - run: echo ${{ github.event.pull_request.user.login }}
