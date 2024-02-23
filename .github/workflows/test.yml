@@ -1,0 +1,28 @@
+name: Tests
+on:
+  pull_request:
+
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    - uses: technote-space/get-diff-action@v6.1.2
+      id: git_diff
+      with:
+        PATTERNS: |
+          **/*.go
+          go.mod
+          go.sum
+    - name: test app
+      if: env.GIT_DIFF
+      run: |
+        go test -coverprofile=cover.out ./...
+    - uses: actions/upload-artifact@v3
+      if: env.GIT_DIFF
+      with:
+        name: '${{ github.sha }}-app-coverage'
+        path: cover.out
